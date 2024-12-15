@@ -229,6 +229,8 @@ class DeepEnsemble(Model):
 
         self._assert_no_models()
 
+        self.quantized = False
+
     def _assert_no_models(self):
         assert self.no_models == len(
             self.models
@@ -328,3 +330,5 @@ class DeepEnsemble(Model):
         for i in range(self.no_models):
             for j in model_range:
                 self.models[i][j] = self._quantize_model(self.models[i][j])
+
+        self.quantized = True

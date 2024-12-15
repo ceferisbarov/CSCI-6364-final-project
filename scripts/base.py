@@ -270,10 +270,11 @@ class Model:
             inputs = {i: j for i, j in zip(input_kws, [target_seq, s_1, s_2])}
             decode = decoder_model.get_signature_runner("serving_default")
             decoded = decode(**inputs)
-
-            output_tokens = decoded[output_kws[0]]
-            c = decoded[output_kws[1]]
-            h = decoded[output_kws[2]]
+            # print("******************")
+            # print(output_kws)
+            output_tokens = decoded[output_kws[2]]
+            c = decoded[output_kws[0]]
+            h = decoded[output_kws[1]]
 
             # Sample a token
             sampled_token_index = np.argmax(output_tokens[0, -1, :])

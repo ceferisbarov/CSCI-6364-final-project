@@ -20,7 +20,7 @@ from models import DeepEnsemble
 batch_size = 32
 epochs = 20
 
-no_models = 8
+no_models = 3
 threshold = int(round(no_models * 2 / 3) / no_models * 100) / 100
 
 de = DeepEnsemble(
@@ -34,9 +34,9 @@ de = DeepEnsemble(
     target_token_index=target_token_index,
 )
 
-plot_model(de.models[0][0], show_shapes=True, to_file="images/model.png")
-plot_model(de.models[0][1], show_shapes=True, to_file="images/encoder.png")
-plot_model(de.models[0][2], show_shapes=True, to_file="images/decoder.png")
+# plot_model(de.models[0][0], show_shapes=True, to_file="images/model.png")
+# plot_model(de.models[0][1], show_shapes=True, to_file="images/encoder.png")
+# plot_model(de.models[0][2], show_shapes=True, to_file="images/decoder.png")
 
 history = de.fit(
     x=[encoder_input_data, decoder_input_data],
@@ -46,7 +46,9 @@ history = de.fit(
     validation_split=0.2,
 )
 
-save_path = "models/DE_v4"
+save_path = "models/DE_ENG_v2"
 
 if not os.path.exists(save_path):
     de.save(save_path)
+else:
+    print("Already exists.")

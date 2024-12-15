@@ -59,17 +59,18 @@ def calculate_distance(data):
 
 def calculate_points(data):
     length = data.shape[0]
+    length = length if length else length + 1
     org_points = [
-        data[data["org"] == 0].shape[0] / length,
-        data[data["org"] <= 1].shape[0] / length,
-        data[data["org"] <= 2].shape[0] / length,
-        data[data["org"] <= 3].shape[0] / length,
+        (data[data["org"] == 0].shape[0] + 1) / length,
+        (data[data["org"] <= 1].shape[0] + 1) / length,
+        (data[data["org"] <= 2].shape[0] + 1) / length,
+        (data[data["org"] <= 3].shape[0] + 1) / length,
     ]
     pred_points = [
-        data[data["distance"] == 0].shape[0] / length,
-        data[data["distance"] <= 1].shape[0] / length,
-        data[data["distance"] <= 2].shape[0] / length,
-        data[data["distance"] <= 3].shape[0] / length,
+        (data[data["distance"] == 0].shape[0] + 1) / length,
+        (data[data["distance"] <= 1].shape[0] + 1) / length,
+        (data[data["distance"] <= 2].shape[0] + 1) / length,
+        (data[data["distance"] <= 3].shape[0] + 1) / length,
     ]
 
     return np.array([org_points, pred_points])

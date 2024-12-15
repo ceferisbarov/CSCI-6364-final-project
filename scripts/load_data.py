@@ -7,8 +7,15 @@ This script takes the processed data, and prepares it for downstream tasks.
 """
 
 # Load the data
-train_data = pd.read_csv("data/train.csv")
-test_data = pd.read_csv("data/test.csv")
+data = pd.read_csv("data/english.csv")
+data = data.sample(frac=1, random_state=42)
+train_data = data.sample(frac=0.8, random_state=42)
+test_data = data.drop(train_data.index)
+
+# data = pd.read_csv("data/processed.csv")
+# data = data.sample(frac=1, random_state=42)
+# train_data = data.sample(frac=0.8, random_state=42)
+# test_data = data.drop(train_data.index)
 
 # Vectorize the data.
 input_texts = []

@@ -26,12 +26,12 @@ test_data.dropna(inplace=True)
 test_data = test_data[test_data["text"].apply(lambda s: all(c in chars for c in s))]
 test_data = test_data[test_data["text"].str.len() <= train_data["text"].str.len().max()]
 
-load_path = "models/DE_v4"
+load_path = "models/DE_ENG_v2"
 parameters = pd.read_csv("scripts/parameters.csv", header=0)
 
 myde = DeepEnsemble.load_from_dir(
     load_path,
-    no_models=8,
+    no_models=3,
     threshold=3,
     max_encoder_seq_length=max_encoder_seq_length,
     max_decoder_seq_length=max_decoder_seq_length,
@@ -46,6 +46,8 @@ myde.quantize()
 for n, params in parameters.iterrows():
     no_models = int(params.n_models)
     treshold = int(params.treshold)
+    no_models = 3
+    treshold = 2
 
     output = []
     start = time.time()
@@ -75,3 +77,5 @@ for n, params in parameters.iterrows():
         no_models=no_models,
         treshold=treshold,
     )
+
+    break
